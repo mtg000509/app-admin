@@ -2,6 +2,7 @@ import path from 'path';
 
 import vue from '@vitejs/plugin-vue';
 import { defineConfig, loadEnv } from 'vite';
+import { viteMockServe } from 'vite-plugin-mock';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import vueDevTools from 'vite-plugin-vue-devtools';
 
@@ -19,6 +20,16 @@ export default defineConfig(({ mode }) => {
         iconDirs: [path.resolve(process.cwd(), 'src/assets/icons')],
         // SVG Symbol ID 格式
         symbolId: 'icon-[dir]-[name]',
+      }),
+      viteMockServe({
+        // Mock 数据存放路径
+        mockPath: 'src/mock',
+        // 监听 Mock 文件变化
+        watchFiles: true,
+        // 是否启用 Mock 数据
+        enable: env.VITE_MOCK_ENABLE === 'true',
+        // 是否输出日志
+        logger: false,
       }),
     ],
     resolve: {

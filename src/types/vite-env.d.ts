@@ -5,6 +5,8 @@ interface ImportMetaEnv {
   readonly VITE_PORT?: string;
   // crypto 密钥
   readonly VITE_CRYPTO_SECRET_KEY?: string;
+  // mock 服务
+  readonly VITE_MOCK_ENABLE?: string;
 }
 
 interface ImportMeta {

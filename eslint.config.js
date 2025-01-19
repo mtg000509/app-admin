@@ -89,7 +89,7 @@ export default [
       // 禁止在 switch 语句中出现重复测试表达式的 case
       'no-duplicate-case': 'error',
       // 禁止重复模块导入，从导入的模块重新导出需要直接导出
-      'no-duplicate-imports': ['error', { includeExports: true }],
+      'no-duplicate-imports': 'off',
       // 不允许在正则表达式中使用空字符类
       'no-empty-character-class': 'error',
       // 不允许空解构模式
@@ -931,7 +931,7 @@ export default [
       // 禁止使用命名空间导入（`import * as ...`），提升代码可读性和维护性
       'import/no-namespace': 'error',
       // 强制所有导出语句在文件末尾，保持代码结构一致
-      'import/exports-last': 'error',
+      'import/exports-last': 'off',
       // 允许使用命名导出，不强制默认导出
       'import/prefer-default-export': 'off',
     },

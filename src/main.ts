@@ -1,5 +1,6 @@
 // 引入全局组件
 import globalComponent from '@/components';
+import i18n from '@/locales';
 import router from '@/router';
 import pinia from '@/store';
 
@@ -21,10 +22,10 @@ const app = createApp(App);
 
 // 安装 Element Plus
 app.use(ElementPlus);
-
 // 注册全局组件
 app.use(globalComponent);
-
+// 安装 i18n
+app.use(i18n);
 // 安装 pinia
 app.use(pinia);
 // 安装 router
