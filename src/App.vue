@@ -1,9 +1,7 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineOptions({ name: 'App' });
+</script>
 
 <template>
-  <div>
-    App
-  </div>
+  <router-view></router-view>
 </template>
-
-<style scoped></style>

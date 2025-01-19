@@ -255,7 +255,7 @@ export default [
       // 不允许连续的行注释，支持块注释，要求块状注释在每行之前有一个对齐的 * 字符
       'multiline-comment-style': ['error', 'starred-block'],
       // 要求构造函数名称以大写字母开头
-      'new-cap': 'error',
+      'new-cap': ['error', { newIsCap: true, capIsNew: false, properties: false }],
       // 禁止使用 alert、confirm 和 prompt
       'no-alert': 'error',
       /**

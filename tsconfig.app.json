@@ -8,7 +8,15 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    // 解析非相对模块的基地址，通常设置为项目的根目录
+    "baseUrl": "./",
+    // 路径映射配置，定义模块路径别名
+    "paths": {
+      // '@' 别名指向 src 目录
+      "@/*": ["src/*"]
+    }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]
 }
