@@ -2,6 +2,7 @@ import path from 'path';
 
 import vue from '@vitejs/plugin-vue';
 import { defineConfig, loadEnv } from 'vite';
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import vueDevTools from 'vite-plugin-vue-devtools';
 
 // https://vite.dev/config/
@@ -10,7 +11,16 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd());
 
   return {
-    plugins: [vue(), vueDevTools()],
+    plugins: [
+      vue(),
+      vueDevTools(),
+      createSvgIconsPlugin({
+        // svg 图标文件夹路径
+        iconDirs: [path.resolve(process.cwd(), 'src/assets/icons')],
+        // SVG Symbol ID 格式
+        symbolId: 'icon-[dir]-[name]',
+      }),
+    ],
     resolve: {
       alias: {
         // 配置 '@' 为 src 目录的别名

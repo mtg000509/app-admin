@@ -167,7 +167,7 @@ export default [
        */
       'no-use-before-define': 'off',
       // 不使用值时禁止变量赋值
-      'no-useless-assignment': 'error',
+      'no-useless-assignment': 'off',
       // 禁止在正则表达式中使用无用的反向引用
       'no-useless-backreference': 'error',
       // 禁止因使用 await 或 yield 而导致竞争条件的分配
@@ -891,7 +891,7 @@ export default [
       // 确保命名空间导入（`import * as ...`）解析成功
       'import/namespace': 'error',
       // 禁止导入无法解析的模块，避免潜在的运行时错误
-      'import/no-unresolved': 'error',
+      'import/no-unresolved': ['error', { ignore: ['virtual:.*'] }],
       // 禁止使用绝对路径导入模块，确保模块路径相对或基于项目根目录
       'import/no-absolute-path': 'error',
       // 禁止动态 `require` 调用，避免不明确的模块解析

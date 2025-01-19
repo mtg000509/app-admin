@@ -16,7 +16,13 @@
     "paths": {
       // '@' 别名指向 src 目录
       "@/*": ["src/*"]
-    }
+    },
+
+    // 类型声明包
+    "types": [
+      // Element Plus 全局组件类型
+      "element-plus/global"
+    ]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]
 }
