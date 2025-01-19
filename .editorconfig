@@ -1,0 +1,12 @@
+root = true # 表示最顶层的 EditorConfig 配置文件
+
+[*]
+charset = utf-8 # 文件字符集
+indent_style = space # 缩进样式
+indent_size = 2 # 缩进大小
+end_of_line = lf # 换行符
+trim_trailing_whitespace = true # 删除行尾多余的空白字符
+insert_final_newline = true # 在文件结尾添加一个新行
+
+[*.md]
+trim_trailing_whitespace = false # 保留 Markdown 文件末尾的空格

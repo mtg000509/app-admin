@@ -8,4 +8,6 @@ dist
 build
 coverage
 
-.cache
+*-lock.yaml
+*.svg
+*.sh
