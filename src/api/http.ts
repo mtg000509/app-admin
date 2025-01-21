@@ -2,9 +2,17 @@ import type { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'a
 
 import axios from 'axios';
 
+/*
+ * interface ResponseData<T = any> {
+ *   code: number;
+ *   message: Record<string, string>;
+ *   data: T;
+ * }
+ */
+
 // 创建 Axios 实例
 const http: AxiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
+  baseURL: import.meta.env.VITE_API_BASE_URL || '/api',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',

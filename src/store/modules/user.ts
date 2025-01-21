@@ -1,27 +1,26 @@
-import i18n from '@/locales';
 import { hashSHA256, aesEncrypt, aesDecrypt } from '@/utils/crypto';
 
-import { ref } from 'vue';
+import { reactive } from 'vue';
 
 import { acceptHMRUpdate, defineStore } from 'pinia';
 
 // Store ID
-const storeId = 'setting';
+const storeId = 'user';
 
 // 加密后的 Store ID
 const shaStoreId = hashSHA256(storeId);
 
-export const useSettingStore = defineStore(
+export const useUserStore = defineStore(
   // Store 名称，必须唯一
   storeId,
   () => {
-    // 当前语言
-    const currentLanguage = ref<string>('');
+    // 用户信息
+    const userInfo = reactive({
+      name: '',
+      avatar: '',
+    });
 
-    const sessionData = aesDecrypt(sessionStorage.getItem(shaStoreId) || '');
-    currentLanguage.value = sessionData?.currentLanguage ? sessionData.currentLanguage : i18n.global.locale.value;
-
-    return { currentLanguage };
+    return { userInfo };
   },
   {
     // 持久化配置
@@ -44,5 +43,5 @@ export const useSettingStore = defineStore(
 
 // HMR（热模块替换）
 if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(useSettingStore, import.meta.hot));
+  import.meta.hot.accept(acceptHMRUpdate(useUserStore, import.meta.hot));
 }

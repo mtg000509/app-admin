@@ -228,7 +228,7 @@ export default [
       // 不允许指定的标识符
       'id-denylist': 'off',
       // 强制执行最小和最大标识符长度
-      'id-length': ['error', { min: 2 }],
+      'id-length': 'off',
       // 限制变量名必须匹配指定的正则表达式
       'id-match': 'off',
       // 要求或禁止在变量声明中进行初始化
@@ -929,7 +929,7 @@ export default [
         },
       ],
       // 禁止使用命名空间导入（`import * as ...`），提升代码可读性和维护性
-      'import/no-namespace': 'error',
+      'import/no-namespace': 'off',
       // 强制所有导出语句在文件末尾，保持代码结构一致
       'import/exports-last': 'off',
       // 允许使用命名导出，不强制默认导出
