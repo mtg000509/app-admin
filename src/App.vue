@@ -1,13 +1,22 @@
 <script setup lang="ts">
-import { ElConfigProvider } from 'element-plus';
-import zhCn from 'element-plus/es/locale/lang/zh-cn';
+import type { LanguageKeys } from '@/locales';
+import { elementLanguage } from '@/locales/element';
+import { useSettingStore } from '@/store/modules/setting';
+
+import { computed } from 'vue';
 
 defineOptions({ name: 'App' });
+
+const settingStore = useSettingStore();
+
+const locale = computed(() => {
+  return elementLanguage[settingStore.currentLanguage as LanguageKeys];
+});
 </script>
 
 <template>
   <!-- 国际化 -->
-  <el-config-provider :locale="zhCn">
+  <el-config-provider :locale="locale">
     <router-view></router-view>
   </el-config-provider>
 </template>

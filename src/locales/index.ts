@@ -1,9 +1,9 @@
 import { createI18n } from 'vue-i18n';
 
 // 动态导入 en 目录下的所有 .ts 文件
-const enModules = import.meta.glob('@/locales/en/*.ts', { eager: true });
+const enModules = import.meta.glob('@/locales/en/**/*.ts', { eager: true });
 // 动态导入 zh-cn 目录下的所有 .ts 文件
-const zhCnModules = import.meta.glob('@/locales/zh-cn/*.ts', { eager: true });
+const zhCnModules = import.meta.glob('@/locales/zh-cn/**/*.ts', { eager: true });
 
 // 定义一个工具函数，将模块内容合并到语言对象中
 const mergeLocaleModules = (modules: Record<string, any>) => {
@@ -23,13 +23,13 @@ export const languageList = {
   en: 'English',
 } as const;
 
-type LanguageKeys = keyof typeof languageList;
+export type LanguageKeys = keyof typeof languageList;
 
 // 定义语言配置
-const languageConfig: Record<LanguageKeys, any> = {
+const languageConfig = {
   zhCn: mergeLocaleModules(zhCnModules),
   en: mergeLocaleModules(enModules),
-};
+} satisfies Record<LanguageKeys, any>;
 
 // 创建 i18n 实例
 const i18n = createI18n({
@@ -44,5 +44,10 @@ const i18n = createI18n({
   // 语言包配置
   messages: languageConfig,
 });
+
+// 设置语言
+export const setLanguage = (language: LanguageKeys) => {
+  i18n.global.locale.value = language;
+};
 
 export default i18n;

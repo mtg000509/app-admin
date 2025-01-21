@@ -1,7 +1,7 @@
 import i18n from '@/locales';
 import { hashSHA256, aesEncrypt, aesDecrypt } from '@/utils/crypto';
 
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 import { acceptHMRUpdate, defineStore } from 'pinia';
 
@@ -16,10 +16,21 @@ export const useSettingStore = defineStore(
   storeId,
   () => {
     // 当前语言
-    const currentLanguage = ref<string>('');
+    const currentLanguage = ref<string>(i18n.global.locale.value);
 
+    // 监听 vue-i18n 的当前语言
+    watch(
+      () => i18n.global.locale.value,
+      (newValue) => {
+        currentLanguage.value = newValue;
+      },
+    );
+
+    // 如果 sessionStorage 存在设置语言则加载语言
     const sessionData = aesDecrypt(sessionStorage.getItem(shaStoreId) || '');
-    currentLanguage.value = sessionData?.currentLanguage ? sessionData.currentLanguage : i18n.global.locale.value;
+    if (sessionData?.currentLanguage) {
+      i18n.global.locale.value = sessionData.currentLanguage;
+    }
 
     return { currentLanguage };
   },
