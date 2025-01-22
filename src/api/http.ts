@@ -1,14 +1,9 @@
+import i18n from '@/locales';
+
 import type { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 
 import axios from 'axios';
-
-/*
- * interface ResponseData<T = any> {
- *   code: number;
- *   message: Record<string, string>;
- *   data: T;
- * }
- */
+import { ElMessage } from 'element-plus';
 
 // 创建 Axios 实例
 const http: AxiosInstance = axios.create({
@@ -31,9 +26,24 @@ http.interceptors.request.use(
 // 响应拦截器
 http.interceptors.response.use(
   (response: AxiosResponse) => {
+    const { code, message } = response.data;
+
+    // 如果 message 是对象，则根据当前语言获取对应语言的值
+    if (message && typeof message === 'object') {
+      response.data.message = message[i18n.global.locale.value];
+    }
+
+    if (code !== 200) {
+      return Promise.reject(new Error(response.data.message));
+    }
+
     return response.data;
   },
   (error) => {
+    ElMessage.error({
+      message: error?.response?.statusText,
+      type: 'error',
+    });
     return Promise.reject(error);
   },
 );

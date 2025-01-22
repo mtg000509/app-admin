@@ -23,7 +23,7 @@ export default defineConfig(({ mode }) => {
       }),
       viteMockServe({
         // Mock 数据存放路径
-        mockPath: 'src/mock',
+        mockPath: 'mock',
         // 监听 Mock 文件变化
         watchFiles: true,
         // 是否启用 Mock 数据

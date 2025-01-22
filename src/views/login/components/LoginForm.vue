@@ -1,11 +1,18 @@
 <script setup lang="ts">
+import { useUserStore } from '@/store/modules/user';
+
 import { Lock, User } from '@element-plus/icons-vue';
 import { useForm } from '@vorms/core';
+import { ElMessage } from 'element-plus';
 import { useI18n } from 'vue-i18n';
+import { useRouter } from 'vue-router';
 
 defineOptions({ name: 'LoginForm' });
 
 const { t } = useI18n();
+const $router = useRouter();
+
+const userStore = useUserStore();
 
 const {
   values: loginFormData,
@@ -16,8 +23,8 @@ const {
   register,
 } = useForm({
   initialValues: {
-    username: '',
-    password: '',
+    username: 'admin',
+    password: '123456',
   },
   validate(values) {
     const errors: Record<string, string> = {};
@@ -26,23 +33,27 @@ const {
       errors.username = t('login.rules.username.empty');
     } else if (values.username.length < 5 || values.username.length > 11) {
       errors.username = t('login.rules.username.length');
+    } else if (!/^[A-Za-z0-9]+$/.test(values.username)) {
+      errors.username = t('login.rules.username.invalid');
     }
 
     if (!values.password) {
       errors.password = t('login.rules.password.empty');
     } else if (values.password.length < 6 || values.password.length > 18) {
       errors.password = t('login.rules.password.length');
+    } else if (!/^[A-Za-z0-9]+$/.test(values.password)) {
+      errors.password = t('login.rules.password.invalid');
     }
 
     return errors;
   },
-  onSubmit(values, { setSubmitting }) {
+  async onSubmit(values, { setSubmitting }) {
     try {
-      // 提交成功逻辑
-      console.log('Form submitted:', values);
+      const { message } = await userStore.userLogin(values);
+      ElMessage.success({ message, type: 'success' });
+      await $router.push('/');
     } catch (error) {
-      // 处理错误
-      console.error('Submission failed:', error);
+      ElMessage.error({ message: (error as Error).message, type: 'error' });
     } finally {
       setTimeout(() => {
         // // 无论成功或失败，手动停止 loading
@@ -102,7 +113,7 @@ const { attrs: passwordFieldAttrs } = register('password');
   left: 50%; /* 将表单的左侧定位到页面水平中心 */
   width: 30%;
   padding: 40px;
-  border-radius: 8px; /* 添加圆角 */
+  border-radius: 20px; /* 添加圆角 */
   box-shadow: 0 4px 12px rgb(0 0 0 / 10%); /* 添加阴影 */
   transform: translate(-50%, -50%); /* 将表单的中心点移动到页面中心 */
 

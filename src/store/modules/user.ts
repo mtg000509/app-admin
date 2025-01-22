@@ -1,6 +1,8 @@
+import { userLoginRequest } from '@/api/modules/user';
+import { userLoginRequestSchema, type userLoginRequestType, userLoginResponseSchema } from '@/api/types/user';
 import { hashSHA256, aesEncrypt, aesDecrypt } from '@/utils/crypto';
 
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 
 import { acceptHMRUpdate, defineStore } from 'pinia';
 
@@ -14,13 +16,25 @@ export const useUserStore = defineStore(
   // Store 名称，必须唯一
   storeId,
   () => {
+    // 用户 token
+    const userToken = ref<string>('');
+
     // 用户信息
     const userInfo = reactive({
       name: '',
       avatar: '',
     });
 
-    return { userInfo };
+    // 用户登录
+    const userLogin = async (data: userLoginRequestType) => {
+      const checkData = userLoginRequestSchema.parse(data);
+      const result = await userLoginRequest(checkData);
+      const checkResult = userLoginResponseSchema.parse(result);
+      userToken.value = checkResult.data.token;
+      return checkResult;
+    };
+
+    return { userInfo, userLogin };
   },
   {
     // 持久化配置

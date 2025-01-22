@@ -11,7 +11,7 @@ const loginFunDropdown = (command: LanguageKeys) => {
 };
 // 跳转到 GitHub
 const goToGitHub = () => {
-  window.open('https://github.com/mtg000509/app-admin', '_blank');
+  window.location.href = 'https://github.com/mtg000509/app-admin';
 };
 </script>
 
