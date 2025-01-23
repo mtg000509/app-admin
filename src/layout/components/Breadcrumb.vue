@@ -1,16 +1,16 @@
 <script setup lang="ts">
-defineOptions({ name: 'LayoutSetting' });
+defineOptions({ name: 'LayoutBreadcrumb' });
 </script>
 
 <template>
-  <div class="layout-setting">setting</div>
+  <div class="layout-breadcrumb">Breadcrumb</div>
 </template>
 
 <style scoped lang="scss">
-.layout-setting {
+.layout-breadcrumb {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   width: 100%;
   height: 100%;
 }

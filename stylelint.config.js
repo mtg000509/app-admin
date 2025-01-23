@@ -38,5 +38,7 @@ export default {
   rules: {
     // 禁止空源文件
     'no-empty-source': null,
+    // 忽略以 `$` 开头的 SCSS 变量
+    'declaration-property-value-no-unknown': [true, { ignoreProperties: { '/.+/': ['/\\$.+/'] } }],
   },
 };
