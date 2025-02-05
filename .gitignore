@@ -1,0 +1,14 @@
+.DS_Store
+.idea
+
+node_modules
+build
+dist
+dist-ssr
+out
+coverage
+
+.vscode/*
+!.vscode/extensions.json
+
+*.log
