@@ -1,5 +1,5 @@
-import { setupRouterGuards } from '@/router/guards';
-import staticRoutes from '@/router/modules/static';
+import { setupRouterGuards } from './guards';
+import { staticRoutes } from './routes/static';
 
 import { createRouter, createWebHistory } from 'vue-router';
 

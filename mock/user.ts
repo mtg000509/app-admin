@@ -4,19 +4,19 @@ const userList = () => {
   return [
     {
       userId: 1,
-      avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-      username: 'admin',
+      name: '用户',
+      avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
+      username: 'users',
       password: '123456',
-      desc: '平台管理员',
-      token: 'Admin Token',
+      token: 'Users Token',
     },
     {
       userId: 2,
+      name: '管理员',
       avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-      username: 'system',
+      username: 'admin',
       password: '123456',
-      desc: '系统管理员',
-      token: 'System Token',
+      token: 'Admin Token',
     },
   ];
 };

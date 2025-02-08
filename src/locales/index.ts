@@ -23,6 +23,7 @@ export const languageList = {
   en: 'English',
 } as const;
 
+// 定义语言键类型
 export type LanguageKeys = keyof typeof languageList;
 
 // 定义语言配置
@@ -44,10 +45,5 @@ const i18n = createI18n({
   // 语言包配置
   messages: languageConfig,
 });
-
-// 设置语言
-export const setLanguage = (language: LanguageKeys) => {
-  i18n.global.locale.value = language;
-};
 
 export default i18n;

@@ -40,5 +40,9 @@ export default {
     'no-empty-source': null,
     // 忽略以 `$` 开头的 SCSS 变量
     'declaration-property-value-no-unknown': [true, { ignoreProperties: { '/.+/': ['/\\$.+/'] } }],
+    // 允许使用伪类
+    'selector-pseudo-class-no-unknown': [true, { ignorePseudoClasses: ['deep'] }],
+    // 关闭强制类选择器的命名模式
+    'selector-class-pattern': null,
   },
 };
