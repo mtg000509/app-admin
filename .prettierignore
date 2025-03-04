@@ -1,0 +1,7 @@
+node_modules
+dist
+dist-ssr
+
+*-lock.yaml
+**/*.svg
+**/*.sh
