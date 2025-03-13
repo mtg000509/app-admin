@@ -8,4 +8,4 @@ pinia.use(piniaPluginPersistedstate);
 
 export default pinia;
 
-export * from './modules/setting';
+export * from './setting';

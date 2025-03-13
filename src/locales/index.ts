@@ -37,3 +37,5 @@ export default i18n;
 export { localeOption };
 
 export type { LocaleType };
+
+export * from './element';
