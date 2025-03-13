@@ -4,6 +4,8 @@ import axios, {
   type InternalAxiosRequestConfig,
 } from 'axios';
 
+import i18n from '@/locales';
+
 // 接口返回数据结构
 interface ApiResponse<T = any> {
   code: number;
@@ -33,6 +35,13 @@ request.interceptors.response.use(
   (response: AxiosResponse<ApiResponse>) => {
     if (response.data.code !== 200) {
       return Promise.reject(new Error(response.data.message));
+    }
+
+    const { message } = response.data.data;
+
+    // 根据当前语言获取响应消息
+    if (message && typeof message === 'object') {
+      response.data.data.message = message[i18n.global.locale.value];
     }
 
     return response.data.data;
