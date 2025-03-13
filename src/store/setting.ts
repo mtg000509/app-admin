@@ -1,7 +1,9 @@
+import { useCssVar, useDark } from '@vueuse/core';
 import { acceptHMRUpdate, defineStore } from 'pinia';
-import { ref, watch } from 'vue';
+import { ref, useTemplateRef, watch } from 'vue';
 
 import i18n, { type LocaleType } from '@/locales';
+import { preferences } from '@/preferences';
 
 interface SessionStorageData {
   locale?: LocaleType;
@@ -44,7 +46,22 @@ const useSettingStore = defineStore(
     // 初始化语言
     initializeLocale();
 
-    return { locale };
+    // 暗黑模式
+    const isDark = useDark();
+
+    // 初始化暗黑模式
+    isDark.value = preferences.isDark || false;
+
+    // DOM 元素 el
+    const el = useTemplateRef<HTMLElement>('el');
+
+    // 主题色
+    const primaryColor = useCssVar('--el-color-primary', el);
+
+    // 初始化主题色
+    primaryColor.value = preferences.primaryColor || '#409eff';
+
+    return { locale, isDark, primaryColor };
   },
   {
     persist: {
