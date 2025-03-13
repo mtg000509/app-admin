@@ -75,8 +75,6 @@ export default [
       'no-self-compare': 'error',
       // 禁止在常规字符串中使用模板字面占位符语法
       'no-template-curly-in-string': 'error',
-      // 禁止使用未声明的变量，除非在 /*global */ 注释中提及
-      'no-undef': 'error',
       // 不允许循环体只允许一次迭代
       'no-unreachable-loop': 'error',
       /** 禁止未使用的变量  @reason @typescript-eslint/no-unused-vars */
@@ -99,8 +97,6 @@ export default [
       'func-style': ['error', 'expression'],
       // 要求 for-in 循环包含 if 语句
       'guard-for-in': 'error',
-      // 要求在变量声明中进行初始化
-      'init-declarations': ['error', 'always'],
       // 要求逻辑赋值运算符速记
       'logical-assignment-operators': ['error', 'always'],
       // 禁止使用 alert、confirm 和 prompt
@@ -228,11 +224,14 @@ export default [
       // 禁止使用容易混淆的非空断言
       '@typescript-eslint/no-confusing-non-null-assertion': 'error',
       // 禁止出现空的函数，允许空的箭头函数 @reason @typescript-eslint/no-empty-function
-      '@typescript-eslint/no-empty-function': 'error',
+      '@typescript-eslint/no-empty-function': [
+        'error',
+        { allow: ['arrowFunctions'] },
+      ],
       // 无空对象类型
       '@typescript-eslint/no-empty-object-type': 'error',
       // 禁止any类型
-      '@typescript-eslint/no-explicit-any': 'error',
+      '@typescript-eslint/no-explicit-any': 'off',
       // 不允许对初始化为数字、字符串或布尔值的变量或参数进行显式类型声明
       '@typescript-eslint/no-inferrable-types': 'error',
       // 禁止在循环语句中包含不安全引用的函数声明 @reason no-loop-func
@@ -364,10 +363,6 @@ export default [
       'import/no-duplicates': ['error', { 'prefer-inline': true }],
       // 禁止命名的默认导出
       'import/no-named-default': 'error',
-      'import/no-unassigned-import': [
-        'error',
-        { allow: ['**/*.css', '**/*.scss'] },
-      ],
       // 强制导入顺序规则
       'import/order': [
         'error',
@@ -391,8 +386,6 @@ export default [
           ],
         },
       ],
-      // 首选默认导出
-      'import/prefer-default-export': 'error',
     },
   },
 
