@@ -1,8 +1,20 @@
 // 引入全局样式
-import "@/styles/index.scss";
+import '@/styles/index.scss';
 
-import { createApp } from "vue";
+import { createApp } from 'vue';
 
-import App from "./App.vue";
+import globalComponent from '@/components';
+import i18n from '@/locales';
+import router from '@/router';
+import pinia from '@/store';
 
-createApp(App).mount("#app");
+import App from './App.vue';
+
+const app = createApp(App);
+
+app.use(i18n);
+app.use(pinia);
+app.use(router);
+app.use(globalComponent);
+
+app.mount('#app');
