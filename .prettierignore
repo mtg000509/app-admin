@@ -5,3 +5,6 @@ dist-ssr
 *-lock.yaml
 **/*.svg
 **/*.sh
+
+auto-import.d.ts
+components.d.ts
