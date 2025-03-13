@@ -1,6 +1,11 @@
 import path from 'path';
 
 import vue from '@vitejs/plugin-vue';
+import AutoImport from 'unplugin-auto-import/vite';
+import IconsResolver from 'unplugin-icons/resolver';
+import Icons from 'unplugin-icons/vite';
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+import Components from 'unplugin-vue-components/vite';
 import { defineConfig, loadEnv } from 'vite';
 import { viteMockServe } from 'vite-plugin-mock';
 import vueDevTools from 'vite-plugin-vue-devtools';
@@ -23,6 +28,15 @@ export default defineConfig(({ mode }) => {
         enable: Boolean(env.VITE_MOCK_ENABLE) || false,
         // 是否输出日志
         logger: false,
+      }),
+      AutoImport({
+        resolvers: [ElementPlusResolver(), IconsResolver()],
+      }),
+      Components({
+        resolvers: [ElementPlusResolver(), IconsResolver()],
+      }),
+      Icons({
+        autoInstall: true,
       }),
     ],
     resolve: {
