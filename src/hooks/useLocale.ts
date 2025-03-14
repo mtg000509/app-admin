@@ -1,6 +1,6 @@
 import { computed } from 'vue';
 
-import { type LocaleType, elementOption } from '@/locales';
+import { type LocaleType, elementOption, localeOption } from '@/locales';
 import { useSettingStore } from '@/store';
 
 export const useLocale = () => {
@@ -15,5 +15,5 @@ export const useLocale = () => {
 
   const element = computed(() => elementOption[locale.value]);
 
-  return { locale, element };
+  return { localeOption, locale, element };
 };

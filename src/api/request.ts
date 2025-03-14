@@ -33,22 +33,24 @@ request.interceptors.request.use(
 // 响应拦截器
 request.interceptors.response.use(
   (response: AxiosResponse<ApiResponse>) => {
-    if (response.data.code !== 200) {
-      return Promise.reject(new Error(response.data.message));
-    }
-
-    const { message } = response.data.data;
+    const { code, message } = response.data;
 
     // 根据当前语言获取响应消息
     if (message && typeof message === 'object') {
-      response.data.data.message = message[i18n.global.locale.value];
+      response.data.message = message[i18n.global.locale.value] || '';
     }
 
-    return response.data.data;
+    if (code !== 200) {
+      return Promise.reject(new Error(response.data.message));
+    }
+
+    return response;
   },
   (error) => {
-    return Promise.reject(error);
+    return Promise.reject(new Error(error.code));
   },
 );
 
 export default request;
+
+export type { ApiResponse };

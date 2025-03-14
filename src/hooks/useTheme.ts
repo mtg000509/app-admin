@@ -5,10 +5,10 @@ import { useSettingStore } from '@/store';
 export const useTheme = () => {
   const settingStore = useSettingStore();
 
-  const isDark = computed({
-    get: () => settingStore.isDark,
-    set: (dark: boolean) => {
-      settingStore.isDark = dark;
+  const dark = computed({
+    get: () => settingStore.dark,
+    set: (isDark: boolean) => {
+      settingStore.dark = isDark;
     },
   });
 
@@ -19,5 +19,5 @@ export const useTheme = () => {
     },
   });
 
-  return { isDark, primaryColor };
+  return { dark, primaryColor };
 };

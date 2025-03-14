@@ -9,3 +9,4 @@ pinia.use(piniaPluginPersistedstate);
 export default pinia;
 
 export * from './setting';
+export * from './user';

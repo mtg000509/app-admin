@@ -46,11 +46,19 @@ const useSettingStore = defineStore(
     // 初始化语言
     initializeLocale();
 
+    // 暗黑
+    const dark = ref<boolean>(preferences.isDark || false);
+
     // 暗黑模式
     const isDark = useDark();
 
-    // 初始化暗黑模式
-    isDark.value = preferences.isDark || false;
+    // 监听暗黑变化
+    watch(
+      () => dark.value,
+      (newVal) => {
+        isDark.value = newVal;
+      },
+    );
 
     // DOM 元素 el
     const el = useTemplateRef<HTMLElement>('el');
@@ -61,7 +69,7 @@ const useSettingStore = defineStore(
     // 初始化主题色
     primaryColor.value = preferences.primaryColor || '#409eff';
 
-    return { locale, isDark, primaryColor };
+    return { locale, dark, primaryColor };
   },
   {
     persist: {

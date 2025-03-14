@@ -1,5 +1,7 @@
 // 引入全局样式
 import '@/styles/index.scss';
+// 引入 element-plus 样式
+import 'element-plus/dist/index.css';
 // 引入 element-plus 暗黑模式样式
 import 'element-plus/theme-chalk/dark/css-vars.css';
 

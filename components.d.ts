@@ -8,7 +8,24 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    ElButton: typeof import('element-plus/es')['ElButton']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
+    ElDropdown: typeof import('element-plus/es')['ElDropdown']
+    ElDropdownItem: typeof import('element-plus/es')['ElDropdownItem']
+    ElDropdownMenu: typeof import('element-plus/es')['ElDropdownMenu']
+    ElForm: typeof import('element-plus/es')['ElForm']
+    ElFormItem: typeof import('element-plus/es')['ElFormItem']
+    ElIcon: typeof import('element-plus/es')['ElIcon']
+    ElInput: typeof import('element-plus/es')['ElInput']
+    ElTable: typeof import('element-plus/es')['ElTable']
+    'IMaterialSymbols:darkMode': typeof import('~icons/material-symbols/dark-mode')['default']
+    'IMaterialSymbols:infoI': typeof import('~icons/material-symbols/info-i')['default']
+    'IMaterialSymbols:lightMode': typeof import('~icons/material-symbols/light-mode')['default']
+    'IMaterialSymbols:lock': typeof import('~icons/material-symbols/lock')['default']
+    'IMaterialSymbols:person': typeof import('~icons/material-symbols/person')['default']
+    'IMaterialSymbols:translate': typeof import('~icons/material-symbols/translate')['default']
+    IMaterialSymbolsInfoI: typeof import('~icons/material-symbols/info-i')['default']
+    IMaterialSymbolsTranslate: typeof import('~icons/material-symbols/translate')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
