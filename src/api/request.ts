@@ -5,6 +5,7 @@ import axios, {
 } from 'axios';
 
 import i18n from '@/locales';
+import { useUserStore } from '@/store';
 
 // 接口返回数据结构
 interface ApiResponse<T = any> {
@@ -25,6 +26,11 @@ const request: AxiosInstance = axios.create({
 // 请求拦截器
 request.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
+    const { token } = useUserStore();
+    if (token) {
+      config.headers.token = token;
+    }
+
     return config;
   },
   (error) => Promise.reject(error),

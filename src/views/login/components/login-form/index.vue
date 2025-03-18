@@ -1,8 +1,13 @@
 <script setup lang="ts">
-import { ElMessage, type FormInstance, type FormRules } from 'element-plus';
+import {
+  ElMessage,
+  type FormInstance,
+  type FormRules,
+  ElLoading,
+} from 'element-plus';
 import { reactive, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 import { useUserStore } from '@/store';
 import type { LoginFormType } from '@/types';
@@ -12,6 +17,8 @@ defineOptions({ name: 'LoginForm' });
 const { t } = useI18n();
 
 const $router = useRouter();
+
+const $route = useRoute();
 
 const { userLogin } = useUserStore();
 
@@ -48,21 +55,33 @@ const loginFormRules = reactive<FormRules<typeof loginFormData>>({
   password: [{ validator: validatePassword, trigger: 'blur' }],
 });
 
-const submitForm = (formEl: FormInstance | undefined) => {
+const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
-  formEl.validate(async (valid) => {
-    if (!valid) return;
 
-    try {
-      const { message } = await userLogin(loginFormData);
-      ElMessage.success(message);
+  const isValid = await formEl.validate();
+  if (!isValid) return;
 
-      await $router.push({ path: '/' });
-    } catch (err) {
-      console.error(err);
-      ElMessage.error((err as Error).message);
-    }
+  const loading = ElLoading.service({
+    lock: true,
+    background: 'rgba(0, 0, 0, 0.7)',
   });
+
+  try {
+    const { message } = await userLogin(loginFormData);
+
+    // 增加1秒延时
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    ElMessage.success(message);
+
+    const redirectPath = ($route.query.redirect as string) || '/';
+    await $router.push({ path: redirectPath });
+  } catch (err) {
+    console.error(err);
+    ElMessage.error((err as Error).message);
+  } finally {
+    loading.close();
+  }
 };
 </script>
 
@@ -75,12 +94,12 @@ const submitForm = (formEl: FormInstance | undefined) => {
       :rules="loginFormRules"
       class="login-el-form"
     >
-      <span class="title">Login</span>
+      <span class="title">{{ $t('login.form.title') }}</span>
       <el-form-item prop="username">
         <el-input
           v-model="loginFormData.username"
           autocomplete="off"
-          placeholder="Username"
+          :placeholder="$t('login.form.username')"
         >
           <template #prefix>
             <el-icon :size="25">
@@ -95,7 +114,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
           type="password"
           show-password
           autocomplete="off"
-          placeholder="Password"
+          :placeholder="$t('login.form.password')"
         >
           <template #prefix>
             <el-icon :size="25">

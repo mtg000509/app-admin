@@ -1,4 +1,4 @@
-import type { LoginResType, UserInfoType } from '@/types';
+import type { UserLoginType, UserInfoType } from '@/types';
 
 import request, { type ApiResponse } from './request';
 
@@ -9,7 +9,7 @@ enum API {
 
 // 用户登录
 const userLoginApi = (data: any) => {
-  return request.post<ApiResponse<LoginResType>>(API.USER_LOGIN, data);
+  return request.post<ApiResponse<UserLoginType>>(API.USER_LOGIN, data);
 };
 
 // 获取用户信息

@@ -1,8 +1,17 @@
 import { acceptHMRUpdate, defineStore } from 'pinia';
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 
 import { getUserInfoApi, userLoginApi } from '@/api';
-import type { LoginFormType, UserInfoType } from '@/types';
+import { basicRoutes } from '@/router';
+import {
+  type LoginFormType,
+  userInfoSchema,
+  type UserInfoType,
+  userLoginSchema,
+  type Notification,
+} from '@/types';
+
+import type { RouteRecordRaw } from 'vue-router';
 
 // store id
 const storeId = 'user';
@@ -18,9 +27,10 @@ const useUserStore = defineStore(
 
     // 用户登录
     const userLogin = async (userInfo: LoginFormType) => {
-      const res = await userLoginApi(userInfo);
-      token.value = res.data.data.token;
-      return res.data;
+      const { data } = await userLoginApi(userInfo);
+      const validatedData = userLoginSchema.parse(data.data);
+      token.value = validatedData.token;
+      return data;
     };
 
     // 用户信息
@@ -28,8 +38,9 @@ const useUserStore = defineStore(
 
     // 获取用户信息
     const getUserInfo = async () => {
-      const res = await getUserInfoApi();
-      userInfo.value = res.data.data;
+      const { data } = await getUserInfoApi();
+      const validatedData = userInfoSchema.parse(data.data);
+      userInfo.value = validatedData;
     };
 
     // 退出登录
@@ -38,7 +49,24 @@ const useUserStore = defineStore(
       userInfo.value = null;
     };
 
-    return { token, userLogin, userInfo, getUserInfo, userLogout };
+    // 菜单
+    const menus: RouteRecordRaw[] = [...basicRoutes];
+
+    // 通知
+    const notification = reactive<Notification>({
+      system: [],
+      message: [],
+    });
+
+    return {
+      token,
+      userLogin,
+      userInfo,
+      getUserInfo,
+      userLogout,
+      menus,
+      notification,
+    };
   },
   {
     persist: {
