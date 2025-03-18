@@ -1,2 +1,3 @@
 export * from './preferences';
-export * from './user';
+export * from './api/user';
+export * from './notification';

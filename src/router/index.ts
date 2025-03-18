@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 import setupRouterGuards from './guards';
-import routes from './routes';
+import { basicRoutes } from './routes';
 
 const router = createRouter({
   /*
@@ -11,7 +11,7 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
 
   // 路由配置
-  routes,
+  routes: basicRoutes,
 
   // 滚动行为
   scrollBehavior(to, _from, savedPosition) {
@@ -32,3 +32,5 @@ const router = createRouter({
 setupRouterGuards(router);
 
 export default router;
+
+export { basicRoutes };

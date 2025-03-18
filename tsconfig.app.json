@@ -16,7 +16,9 @@
     "paths": {
       // '@' 别名指向 src 目录
       "@/*": ["src/*"]
-    }
+    },
+
+    "types": ["unplugin-icons/types/vue"]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]
 }

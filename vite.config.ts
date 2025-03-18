@@ -36,6 +36,7 @@ export default defineConfig(({ mode }) => {
         resolvers: [ElementPlusResolver(), IconsResolver()],
       }),
       Icons({
+        compiler: 'vue3',
         autoInstall: true,
       }),
     ],

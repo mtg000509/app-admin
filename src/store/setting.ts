@@ -58,6 +58,7 @@ const useSettingStore = defineStore(
       (newVal) => {
         isDark.value = newVal;
       },
+      { immediate: true },
     );
 
     // DOM 元素 el
@@ -66,10 +67,24 @@ const useSettingStore = defineStore(
     // 主题色
     const primaryColor = useCssVar('--el-color-primary', el);
 
-    // 初始化主题色
-    primaryColor.value = preferences.primaryColor || '#409eff';
+    // 监听主题色变化
+    watch(
+      () => primaryColor.value,
+      (newVal) => {
+        if (!newVal) {
+          primaryColor.value = preferences.primaryColor || '#409eff';
+        }
+      },
+      { immediate: true },
+    );
 
-    return { locale, dark, primaryColor };
+    // 折叠
+    const collapse = ref<boolean>(false);
+
+    // 刷新
+    const refresh = ref<boolean>(false);
+
+    return { locale, dark, primaryColor, collapse, refresh };
   },
   {
     persist: {

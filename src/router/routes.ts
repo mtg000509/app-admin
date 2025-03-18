@@ -1,6 +1,13 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
+import MaterialSymbolsHome from '~icons/material-symbols/home';
+import MaterialSymbolsInfo from '~icons/material-symbols/info';
+import MaterialSymbolsPerson from '~icons/material-symbols/person';
+import MaterialSymbolsSettings from '~icons/material-symbols/settings';
+
 import type { RouteRecordRaw } from 'vue-router';
 
-const routes: RouteRecordRaw[] = [
+const basicRoutes: RouteRecordRaw[] = [
   {
     path: '/login',
     name: 'Login',
@@ -16,7 +23,61 @@ const routes: RouteRecordRaw[] = [
     meta: {
       hidden: false,
     },
+    redirect: '/home',
+    children: [
+      {
+        path: '/home',
+        name: 'Home',
+        component: () => import('@/views/home/index.vue'),
+        meta: {
+          title: 'route.home',
+          icon: MaterialSymbolsHome,
+          hidden: false,
+        },
+      },
+    ],
+  },
+  {
+    path: '/setting',
+    name: 'Setting',
+    component: () => import('@/layout/index.vue'),
+    meta: {
+      title: 'route.setting.title',
+      icon: MaterialSymbolsSettings,
+      hidden: false,
+    },
+    redirect: '/setting/account',
+    children: [
+      {
+        path: '/account',
+        name: 'Account',
+        component: () => import('@/views/setting/account/index.vue'),
+        meta: {
+          title: 'route.setting.account',
+          icon: MaterialSymbolsPerson,
+          hidden: false,
+        },
+      },
+      {
+        path: '/setting/about',
+        name: 'About',
+        component: () => import('@/views/setting/about/index.vue'),
+        meta: {
+          title: 'route.setting.about',
+          icon: MaterialSymbolsInfo,
+          hidden: false,
+        },
+      },
+    ],
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'Error',
+    component: () => import('@/views/error/index.vue'),
+    meta: {
+      hidden: true,
+    },
   },
 ];
 
-export default routes;
+export { basicRoutes };
