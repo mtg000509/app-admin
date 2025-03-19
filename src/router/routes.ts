@@ -46,18 +46,8 @@ const basicRoutes: RouteRecordRaw[] = [
       icon: MaterialSymbolsSettings,
       hidden: false,
     },
-    redirect: '/setting/account',
+    redirect: '/setting/about',
     children: [
-      {
-        path: '/account',
-        name: 'Account',
-        component: () => import('@/views/setting/account/index.vue'),
-        meta: {
-          title: 'route.setting.account',
-          icon: MaterialSymbolsPerson,
-          hidden: false,
-        },
-      },
       {
         path: '/setting/about',
         name: 'About',
@@ -80,4 +70,17 @@ const basicRoutes: RouteRecordRaw[] = [
   },
 ];
 
-export { basicRoutes };
+const accountRoutes: RouteRecordRaw[] = [
+  {
+    path: '/account',
+    name: 'Account',
+    component: () => import('@/views/account/index.vue'),
+    meta: {
+      title: 'route.setting.account',
+      icon: MaterialSymbolsPerson,
+      hidden: false,
+    },
+  },
+];
+
+export { basicRoutes, accountRoutes };

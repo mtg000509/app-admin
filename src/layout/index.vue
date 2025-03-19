@@ -2,8 +2,7 @@
 import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { useLayout, useTheme } from '@/hooks';
-import { useUserStore } from '@/store';
+import { useLayout, useTheme, useUser } from '@/hooks';
 
 import ContentArea from './components/content-area/index.vue';
 import LogoTitle from './components/logo-title/index.vue';
@@ -14,10 +13,11 @@ defineOptions({ name: 'Layout' });
 
 const $route = useRoute();
 
-const { menus } = useUserStore();
+const { menus } = useUser();
 
 const { collapse } = useLayout();
 
+// 默认选中菜单项
 const defaultActive = ref<string>('');
 
 watch(
@@ -107,7 +107,7 @@ const getBoxShadow = () => {
 .main {
   width: calc(100vw - $sidebar-width);
   height: calc(100vh - $navbar-height);
-  padding: 20px;
+  padding: 10px;
 
   &.fold {
     width: calc(100vw - $sidebar-collapse-width);

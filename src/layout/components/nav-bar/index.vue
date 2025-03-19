@@ -2,8 +2,7 @@
 import { computed, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
-import { useLayout, useLocale, useTheme } from '@/hooks';
-import { useUserStore } from '@/store';
+import { useLayout, useLocale, useTheme, useUser } from '@/hooks';
 
 defineOptions({ name: 'NavBar' });
 
@@ -11,7 +10,7 @@ const $router = useRouter();
 
 const $route = useRoute();
 
-const { userInfo, userLogout } = useUserStore();
+const { userInfo, userLogout } = useUser();
 
 const { localeOption, locale } = useLocale();
 
@@ -45,7 +44,7 @@ const fullScreen = () => {
 
 // 跳转账户设置
 const skipAccount = () => {
-  //
+  $router.push({ path: '/account' });
 };
 
 // 退出登录

@@ -9,7 +9,7 @@ import { reactive, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute, useRouter } from 'vue-router';
 
-import { useUserStore } from '@/store';
+import { useUser } from '@/hooks';
 import type { LoginFormType } from '@/types';
 
 defineOptions({ name: 'LoginForm' });
@@ -20,7 +20,7 @@ const $router = useRouter();
 
 const $route = useRoute();
 
-const { userLogin } = useUserStore();
+const { userLogin } = useUser();
 
 const loginFormRef = ref<FormInstance>();
 
@@ -70,7 +70,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
     const { message } = await userLogin(loginFormData);
 
     // 增加1秒延时
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
     ElMessage.success(message);
 
