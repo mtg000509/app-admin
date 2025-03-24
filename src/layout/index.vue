@@ -2,7 +2,7 @@
 import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { useLayout, useTheme, useUser } from '@/hooks';
+import { useLayout, useTheme, useAccount } from '@/hooks';
 
 import ContentArea from './components/content-area/index.vue';
 import LogoTitle from './components/logo-title/index.vue';
@@ -13,7 +13,7 @@ defineOptions({ name: 'Layout' });
 
 const $route = useRoute();
 
-const { menus } = useUser();
+const { menus } = useAccount();
 
 const { collapse } = useLayout();
 
@@ -107,7 +107,7 @@ const getBoxShadow = () => {
 .main {
   width: calc(100vw - $sidebar-width);
   height: calc(100vh - $navbar-height);
-  padding: 10px;
+  padding: 20px;
 
   &.fold {
     width: calc(100vw - $sidebar-collapse-width);

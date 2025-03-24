@@ -7,7 +7,7 @@ import MaterialSymbolsSettings from '~icons/material-symbols/settings';
 
 import type { RouteRecordRaw } from 'vue-router';
 
-const basicRoutes: RouteRecordRaw[] = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/login',
     name: 'Login',
@@ -36,6 +36,16 @@ const basicRoutes: RouteRecordRaw[] = [
         },
       },
     ],
+  },
+  {
+    path: '/account',
+    name: 'Account',
+    component: () => import('@/views/account/index.vue'),
+    meta: {
+      title: 'route.setting.account',
+      icon: MaterialSymbolsPerson,
+      hidden: true,
+    },
   },
   {
     path: '/setting',
@@ -70,17 +80,4 @@ const basicRoutes: RouteRecordRaw[] = [
   },
 ];
 
-const accountRoutes: RouteRecordRaw[] = [
-  {
-    path: '/account',
-    name: 'Account',
-    component: () => import('@/views/account/index.vue'),
-    meta: {
-      title: 'route.setting.account',
-      icon: MaterialSymbolsPerson,
-      hidden: false,
-    },
-  },
-];
-
-export { basicRoutes, accountRoutes };
+export { routes };

@@ -2,7 +2,7 @@ import { acceptHMRUpdate, defineStore } from 'pinia';
 import { reactive, ref } from 'vue';
 
 import { getUserInfoApi, userLoginApi } from '@/api';
-import { basicRoutes } from '@/router';
+import { routes } from '@/router';
 import {
   type LoginFormType,
   userInfoSchema,
@@ -50,7 +50,7 @@ const useUserStore = defineStore(
     };
 
     // 菜单
-    const menus: RouteRecordRaw[] = [...basicRoutes];
+    const menus: RouteRecordRaw[] = [...routes];
 
     // 通知
     const notification = reactive<Notification>({

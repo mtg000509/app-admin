@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
-import { useLayout, useLocale, useTheme, useUser } from '@/hooks';
+import { useLayout, useLocale, useTheme, useAccount } from '@/hooks';
 
 defineOptions({ name: 'NavBar' });
 
@@ -10,7 +10,7 @@ const $router = useRouter();
 
 const $route = useRoute();
 
-const { userInfo, userLogout } = useUser();
+const { userInfo, userLogout } = useAccount();
 
 const { localeOption, locale } = useLocale();
 
@@ -79,7 +79,7 @@ const predefineColors = ref([
 ]);
 
 // 重新加载
-const reload = () => {
+const reset = () => {
   window.sessionStorage.clear();
   window.location.reload();
 };
@@ -129,7 +129,7 @@ const reload = () => {
       <!-- 用户信息 -->
       <el-dropdown trigger="click">
         <span class="user-info">
-          <el-avatar :size="30" :src="userInfo?.avatar" alt="avatar" />
+          <el-avatar :size="25" :src="userInfo?.avatar" alt="avatar" />
           <span>{{ userInfo?.name }}</span>
         </span>
         <template #dropdown>
@@ -247,8 +247,8 @@ const reload = () => {
             :content="$t('layout.drawer.button.tooltip')"
             placement="top"
           >
-            <el-button type="danger" @click="reload">
-              {{ $t('layout.drawer.button.label') }}
+            <el-button type="danger" @click="reset">
+              {{ $t('layout.drawer.button.reset') }}
             </el-button>
           </el-tooltip>
         </template>
@@ -290,7 +290,7 @@ const reload = () => {
 
   .user-info {
     display: inline-flex;
-    gap: 5px;
+    gap: 10px;
     align-items: center;
 
     &:focus-visible {

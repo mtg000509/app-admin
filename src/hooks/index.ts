@@ -2,4 +2,4 @@ export * from './useLocale';
 export * from './useTheme';
 export * from './usePreference';
 export * from './useLayout';
-export * from './useUser';
+export * from './useAccount';

@@ -10,7 +10,7 @@ export default {
     themeColor: '主题色',
     button: {
       tooltip: '恢复配置并重新加载页面',
-      label: '重置',
+      reset: '重置',
     },
   },
   button: {

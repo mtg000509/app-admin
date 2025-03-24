@@ -10,7 +10,7 @@ export default {
     themeColor: 'Theme Color',
     button: {
       tooltip: 'Restore settings and reload the page',
-      label: 'Reset',
+      reset: 'Reset',
     },
   },
   button: {
