@@ -3,21 +3,14 @@ import type { MockMethod } from 'vite-plugin-mock';
 const userList = () => {
   return [
     {
-      userId: 1,
-      name: '用户',
-      avatar:
-        'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
-      username: 'users',
-      password: '123456',
-      token: 'Users Token',
-    },
-    {
-      userId: 2,
-      name: '管理员',
+      id: 1,
+      name: 'Admin',
       avatar:
         'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
       username: 'admin',
-      password: '123456',
+      password: 'Aa12345',
+      phone: '13100000000',
+      email: '13100000000@email.com',
       token: 'Admin Token',
     },
   ];

@@ -9,7 +9,7 @@ import { reactive, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute, useRouter } from 'vue-router';
 
-import { useUser } from '@/hooks';
+import { useAccount } from '@/hooks';
 import type { LoginFormType } from '@/types';
 
 defineOptions({ name: 'LoginForm' });
@@ -20,13 +20,13 @@ const $router = useRouter();
 
 const $route = useRoute();
 
-const { userLogin } = useUser();
+const { userLogin } = useAccount();
 
 const loginFormRef = ref<FormInstance>();
 
 const loginFormData = reactive<LoginFormType>({
-  username: 'admin',
-  password: '123456',
+  username: '',
+  password: '',
 });
 
 const validateUsername = (_rule: any, value: any, callback: any) => {
