@@ -274,6 +274,7 @@ const reset = () => {
     display: flex;
     gap: 5px;
     align-items: center;
+    white-space: nowrap;
   }
 }
 

@@ -1,7 +1,11 @@
+import ECharts from './echarts/index.vue';
+
 import type { App, Component } from 'vue';
 
 // 定义全局组件集合
-const globalComponent: Record<string, Component> = {};
+const globalComponent: Record<string, Component> = {
+  ECharts,
+};
 
 export default {
   install(app: App) {

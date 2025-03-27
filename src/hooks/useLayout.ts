@@ -18,5 +18,6 @@ export const useLayout = () => {
       settingStore.refresh = refresh;
     },
   });
+
   return { collapse, refresh };
 };

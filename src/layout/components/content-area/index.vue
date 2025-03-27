@@ -5,7 +5,7 @@ import { useLayout } from '@/hooks';
 
 defineOptions({ name: 'ContentArea' });
 
-const { refresh } = useLayout();
+const { refresh, collapse } = useLayout();
 
 // 控制当前组件是否销毁重建
 const flag = ref(true);
@@ -19,6 +19,17 @@ watch(
     nextTick(() => {
       flag.value = true;
     });
+  },
+);
+
+watch(
+  () => collapse.value,
+  async () => {
+    flag.value = false;
+    await nextTick();
+    setTimeout(() => {
+      flag.value = true;
+    }, 300);
   },
 );
 </script>

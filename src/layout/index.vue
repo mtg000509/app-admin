@@ -37,6 +37,16 @@ const getBoxShadow = () => {
       : '2px 2px 10px rgb(128 128 128 / 5%)',
   };
 };
+
+window.addEventListener('resize', () => {
+  const width = window.innerWidth;
+
+  if (width < 768) {
+    collapse.value = true;
+  } else {
+    collapse.value = false;
+  }
+});
 </script>
 
 <template>
